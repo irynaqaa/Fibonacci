@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Transactions</title>
+</head>
+<body>
+    <h1>Transactions</h1>
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Description</th>
+        </tr>
+        <#list transactions as transaction>
+        <tr>
+            <td>${transaction.amount}</td>
+            <td>${transaction.category}</td>
+            <td>${transaction.date}</td>
+            <td>${transaction.description}</td>
+        </tr>
+        </#list>
+    </table>
+    <form action="/transactions" method="post">
+        <label for="amount">Amount:</label><br>
+        <input type="number" id="amount" name="amount"><br>
+        <label for="category">Category:</label><br>
+        <input type="text" id="category" name="category"><br>
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date"><br>
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description"><br>
+        <input type="submit" value="Add Transaction">
+    </form>
+    <form action="/transactions/delete" method="post">
+        <label for="index">Index:</label><br>
+        <input type="number" id="index" name="index"><br>
+        <input type="submit" value="Delete Transaction">
+    </form>
+    <form action="/transactions/edit" method="post">
+        <label for="index">Index:</label><br>
+        <input type="number" id="index" name="index"><br>
+        <label for="amount">Amount:</label><br>
+        <input type="number" id="amount" name="amount"><br>
+        <label for="category">Category:</label><br>
+        <input type="text" id="category" name="category"><br>
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date"><br>
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description"><br>
+        <input type="submit" value="Edit Transaction">
+    </form>
+</body>
+</html>
