@@ -1,0 +1,2 @@
+pydantic==1.10.2
+cryptography==37.0.4
