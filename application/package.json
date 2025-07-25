@@ -1,0 +1,13 @@
+{
+  "name": "application",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "engines": {
+    "node": "^18.0.0"
+  },
+  "dependencies": {
+    "playwright": "^1.54.1"
+  }
+}
