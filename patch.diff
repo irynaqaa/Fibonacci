@@ -1,0 +1,38 @@
+--- /tmp/output/8_1/application/Fibonacci/fibonacci_module.py
+@@ -7,13 +7,10 @@
+ def ensure_positive_int(num):
+     # Make sure it's an integer
+     try:
+         val = int(num)
+     except ValueError:
+-        return num
++        raise ValueError(f"{num} is not an integer.")
+ 
+     # Make sure it's positive
+-    if (val < 0):
+-        raise ValueError(num, ' is not positive.')
+-    raise ValueError(f"{num} is not positive.")
++    if val < 0:
++        raise ValueError(f"{num} is not positive.")
++    return val
+
+@@ -41,3 +38,0 @@
+ if num < 0:
+-    raise ValueError('Invalid input. ', num, ' should be a positive integer.')
+-    raise ValueError(f"Invalid input. {num} should be a positive integer.")
+
+@@ -153,2 +148,0 @@
+-ans = input(prompt)
+-ans = input(prompt + " ")
+
+@@ -184,2 +177,0 @@
+-# Remove the return statement to ensure the function continues executing after raising an exception
+-raise IOError("No saved file to find Fibonacci number from.")
+
+@@ -191,2 +182,0 @@
+-return -1
+-raise ValueError(f"{nth} exceeds the number of saved Fibonacci numbers ({size}).")
+
+@@ -224,2 +213,0 @@
+-raise ValueError(f"{input} exceeds highest saved Fibonacci number. Either choose a lower number to round, or regenerate the file containing the saved Fibonacci numbers ({filename}) with more values.")
+-raise ValueError(f"{input} exceeds highest saved Fibonacci number. Either choose a lower number to round, or regenerate the file containing the saved Fibonacci numbers ({filename}) with more values.")
