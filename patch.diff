@@ -1,0 +1,68 @@
+--- application/Fibonacci-master/fibonacci.py
++++ application/Fibonacci-master/fibonacci.py
+@@ -1,6 +1,7 @@
+ # J. Pocahontas Olson   June 2016
+ # Fibonacci generator
++
+ import fibonacci_module as fb         # Custom module made for this project
+ import math                           # Math functions (log, pow, sqrt, etc.)
+ import matplotlib.pyplot as plt       # Plotting
+@@ -13,7 +14,7 @@
+ FIRSTPOINTS  = int(100)
+ PREDICTPOINT = int(500)
+
+-# Introduction to user
++print("Welcome!")
+ print("Welcome!")
+ 
+ ###############################
+@@ -22,7 +23,7 @@
+ try:
+     y = fb.fibList(FIRSTPOINTS)
+ except:
+-    print("Error: Could not generate Fibonacci numbers")
++    print("Error: Could not generate Fibonacci numbers")
+     quit()
+ 
+ x = list(range(1,FIRSTPOINTS+1))  # Adjusts for index starting at 0
+@@ -64,7 +65,7 @@
+ # For large n, the slope approaches phi = (1+sqrt(5))/2.  Let's see what we got.
+ print("We can compare this to the theoretical limit (applicable for large n),\n  which should yield the golden ratio.")
+ print("Compare the fit's prediction: ", math.exp(popt[0]))
+-print("     to the golden ratio phi: ", fb.phi)
++print("     to the golden ratio phi: ", fb.phi)
+ 
+ print("\nSo after using only", FIRSTPOINTS, "Fibonacci numbers, the fit behavior differs from")
+ print("     the theoretical limit by", 100*(1- math.exp(popt[0])/fb.phi), "%")
+@@ -98,7 +99,7 @@
+ 
+ #############################
+ # (3.) Let's see how well our fit did
+-#############################
++#############################
+ fit_differences = [y[nFib-1] - fitFibPrediction(nFib-1,popt[0],popt[1]) for nFib in log_x]
+ fit_percent_differences = [(y[nFib-1] - fitFibPrediction(nFib-1,popt[0],popt[1]))/y[nFib-1] for nFib in log_x]
+ 
+@@ -175,7 +176,7 @@
+ ##############################
+ ## (4.) Clean up noisy data
+-##############################
++##############################
+ HIGHEST_FIB_N      = int(1000)
+ NUMBEROFDATAPOINTS = int(200)
+ 
+@@ -224,7 +225,7 @@
+ # Prompt to make a new saved file
+ import os.path
+ import distutils.util
+-if not os.path.isfile(fb.filename):
++if not os.path.isfile(fb.filename):
+     ans = input("That saved file does not already exist. \n  Would you like to create one?: (Y/N) ")
+     makenew = distutils.util.strtobool(ans)
+     if makenew:
+@@ -269,5 +270,3 @@
+ print("\n\nThis concludes our run-though of using machine learning to predict Fibonacci numbers.")
+ print("Thank you, and enjoy your day!")
+-pylab.show()
+ 
+-
