@@ -1,0 +1,28 @@
+import com.example.blockchain.Transaction;
+import com.example.blockchain.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class TransactionServiceImpl implements com.example.blockchain.TransactionService {
+    @Autowired
+    private TransactionRepository transactionRepository;
+    @Override
+    public void addTransaction(Transaction transaction) {
+        transactionRepository.save(transaction);
+    }
+    @Override
+    public List<Transaction> getAllTransactions() {
+        return transactionRepository.findAll();
+    }
+    @Override
+    public void editTransaction(Transaction transaction) {
+        transactionRepository.save(transaction);
+    }
+    @Override
+    public void deleteTransaction(Long id) {
+        transactionRepository.deleteById(id);
+    }
+}
