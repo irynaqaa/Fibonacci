@@ -31,7 +31,7 @@ def myFib(argument):
     def fibList(num):
         fibNumbers = []
         message = ""
-            
+        
         if num >= 1:
             fibNumbers.append(0)
         if num >= 2:
@@ -50,7 +50,5 @@ def myFib(argument):
 
         return (fibNumbers, message)
 
-
-    #return 'First %d Fibonacci numbers: %s' % (number, fibList(number))
     fibs = fibList(number)
     return render_template('output.html', num=number, list=fibs[0], msg = fibs[1])

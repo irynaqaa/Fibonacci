@@ -31,7 +31,8 @@ if showit:
     plt.title('First ' + str(FIRSTPOINTS) + ' Fibonacci numbers')
     #plt.yscale('log')  # Uncomment to see log graph
     pylab.show(block=False)
-print("\nFrom Figure 1, we can see that the Fibonnaci numbers grow exponentially.")
+print("
+From Figure 1, we can see that the Fibonnaci numbers grow exponentially.")
 
 
 ##############################
@@ -61,16 +62,22 @@ actual500num = predictList[PREDICTPOINT-1]
 logerror = math.sqrt(mean_squared_error(log_y, fit_y))*math.sqrt(FIRSTPOINTS)
 lower500bound = math.exp(fitlog500prediction-logerror)
 upper500bound = math.exp(fitlog500prediction+logerror)
-print("\nFitting a line to the data, the best fit has slope\n", popt[0], "and y-intercept", popt[1])
+print("
+Fitting a line to the data, the best fit has slope
+", popt[0], "and y-intercept", popt[1])
 
 # For large n, the slope approaches phi = (1+sqrt(5))/2.  Let's see what we got.
-print("We can compare this to the theoretical limit (applicable for large n),\n  which should yield the golden ratio.")
+print("We can compare this to the theoretical limit (applicable for large n),
+  which should yield the golden ratio.")
 print("Compare the fit's prediction: ", math.exp(popt[0]))
 print("     to the golden ratio phi: ", fb.phi)
-print("\nSo after using only", FIRSTPOINTS, "Fibonacci numbers, the fit behavior differs from")
+print("
+So after using only", FIRSTPOINTS, "Fibonacci numbers, the fit behavior differs from")
 print("     the theoretical limit by", 100*(1- math.exp(popt[0])/fb.phi), "%")
 
-print("\nWould you like to see a graph of the line we fit to the \nfirst", FIRSTPOINTS,
+print("
+Would you like to see a graph of the line we fit to the 
+first", FIRSTPOINTS,
       "Fibonacci numbers, on a log scale? ")
 showit = strtobool(input("  [Figure 2]  Y/N: "))
 if showit:
@@ -91,12 +98,13 @@ if showit:
     pylab.show(block=False)
 print("From Figure 2, we can see that the fit seems to match the first", int(FIRSTPOINTS),"Fibonacci numbers well,")
 print("and extrapolating the fit to predict the", int(PREDICTPOINT),"th Fibonacci number seems pretty good also.")
-print("\nIn fact, the fit predicts the{0:4d}th Fibonacci number to be {1:12E},".format(int(PREDICTPOINT), math.exp(fitlog500prediction)))
-print("  within [{0:12E}, {1:12E}]. \nThe actual value, {2:12E}, is within these bounds.".format( lower500bound, upper500bound, actual500num))
+print("
+In fact, the fit predicts the{0:4d}th Fibonacci number to be {1:12E},".format(int(PREDICTPOINT), math.exp(fitlog500prediction)))
+print("  within [{0:12E}, {1:12E}]. 
+The actual value, {2:12E}, is within these bounds.".format( lower500bound, upper500bound, actual500num))
 
-print("\nNow let us investigate how much the fit is off by.")
-
-
+print("
+Now let us investigate how much the fit is off by.")
 
 
 #############################
@@ -109,7 +117,8 @@ print("We have calculated the fit's prediction of the first", FIRSTPOINTS, "Fibo
 print("to compare to the actual Fibonacci numbers.")
 
 ## Differences from actual Fibonacci numbers
-print("\nWould you like to see graphs of the differences, and percent differences,")
+print("
+Would you like to see graphs of the differences, and percent differences,")
 print("between the fit's prediction and the actual Fibonacci number?")
 showit = strtobool(input("  [Figure 3]  Y/N: "))
 if showit:
@@ -130,7 +139,8 @@ if showit:
 print("From Figure 3, we can see that the prediction reproduces the Fibonacci numbers")
 print("fairly well, but is off from the true value by more at large n.")
 print("This is to be somewhat expected because of the expontentially increasing numbers involved.")
-print("If you look at the percent differences, the prediction is within a hundreth of a percent.\n")
+print("If you look at the percent differences, the prediction is within a hundreth of a percent.
+")
 
 
 ## Binet's prediction and its differences from actual Fibonacci numbers
@@ -139,12 +149,14 @@ print("to get the n^th Fibonacci number that uses the golden ratio.")
 print("It's called Binet's formula, and more info's on wikipedia:")
 print("   https://en.wikipedia.org/wiki/Fibonacci_number#Closed-form_expression")
 
-print("\nBinet's formula is meant for large n (where the ratio of Fibonacci numbers is ")
+print("
+Binet's formula is meant for large n (where the ratio of Fibonacci numbers is ")
 print("closer to the golden ratio), but let's see what it predicts for the first 100 values.")
 
 binet_differences = [y[nFib-1] - fb.f_Binet(nFib-1) for nFib in log_x]
 binet_percent_differences = [(y[nFib-1] - fb.f_Binet(nFib-1))/y[nFib-1] for nFib in log_x]
-print("\nWould you like to see the same graphs as before (differences and percent differences),")
+print("
+Would you like to see the same graphs as before (differences and percent differences),")
 print("but using Binet's formula to predict the n^th Fibonacci number instead of the fit we made?")
 showit = strtobool(input("  [Figure 4]  Y/N: "))
 if showit:
@@ -170,14 +182,15 @@ print("would improve the accuracy of our fit.")
 
 
 
-
 ##############################
 ## (4.) Clean up noisy data
 ##############################
 HIGHEST_FIB_N      = int(1000)
 NUMBEROFDATAPOINTS = int(200)
 
-print("\n\nWe now move on to part 5, simulating some data collection process, which")
+print("
+
+We now move on to part 5, simulating some data collection process, which")
 print("obtains", NUMBEROFDATAPOINTS, "Fibonacci numbers with some Gaussian noise introduced.")
 print("It's pulling initial values from the first", HIGHEST_FIB_N, "Fibonacci numbers.")
 
@@ -186,9 +199,9 @@ import noisy_input_API as api
 import random
 
 ## Generate true Fibonacci numbers (between 1 and HIGHEST_FIB), to compare to predictions
-fibs = fb.fibList(HIGHEST_FIB_N)
+gen_fibs = fb.fibList(HIGHEST_FIB_N)
 x = [random.randint(1, HIGHEST_FIB_N) for i in range(NUMBEROFDATAPOINTS)]
-y = [fibs[x[i]-1] for i in range(NUMBEROFDATAPOINTS)]  #minus 1 adjusts for index starting at zero
+y = [gen_fibs[x[i]-1] for i in range(NUMBEROFDATAPOINTS)]  #minus 1 adjusts for index starting at zero
 
 ## Generate noisy data
 y_noise = api.add_noise(y)  # fib numbers with noise
@@ -196,7 +209,8 @@ noise_differences = [y_noise[i]-y[i] for i in range(NUMBEROFDATAPOINTS)]
 noise_percent_differences = [(noise_differences[i]/y[i] if y[i]>0 else 0) for i in range(NUMBEROFDATAPOINTS)]
 
 ## Plot of noise
-print("\nWould you like to see a plot of the noise we added to the Fibonacci numbers?")
+print("
+Would you like to see a plot of the noise we added to the Fibonacci numbers?")
 showit = strtobool(input("  [Figure 5]  Y/N: "))
 if showit:
     plt.figure(5)
@@ -213,7 +227,8 @@ print("higher n, to mimic the difficulty in being precise when large numbers are
 
 
 ## Clean-up noise
-print("\nWe clean-up the data, by nudging the noisy value to the nearest Fibonacci number.")
+print("
+We clean-up the data, by nudging the noisy value to the nearest Fibonacci number.")
 print("We can not use the theoretical prediction (Binet's formula), unfortunately, because")
 print("the numbers get too big too fast.")
 print("Instead, I've implemented a way to save off a large amount of Fibonacci numbers to a binary file.")
@@ -224,7 +239,8 @@ print("without having to go the whole way through the file or load it entirely t
 import os.path
 import distutils.util
 if not os.path.isfile(fb.filename):
-    ans = input("That saved file does not already exist. \n  Would you like to create one?: (Y/N) ")
+    ans = input("That saved file does not already exist. 
+  Would you like to create one?: (Y/N) ")
     makenew = distutils.util.strtobool(ans)
     if makenew:
         make_saved_Fibonacci_file()
@@ -241,8 +257,10 @@ for value in range(NUMBEROFDATAPOINTS):
 cleaned_differences = [corrected_fib_numbers[i]-y[i] for i in range(NUMBEROFDATAPOINTS)]
 
 ## Plot of error in clean-up
-print("\nWhen cleaning up the data, we were wrong",len(wrongPrediction),"out of", NUMBEROFDATAPOINTS, "times.")
-#print("\nWould you like to see a plot of how often we were wrong in cleaning up the data?")
+print("
+When cleaning up the data, we were wrong",len(wrongPrediction),"out of", NUMBEROFDATAPOINTS, "times.")
+#print("
+Would you like to see a plot of how often we were wrong in cleaning up the data?")
 #showit = strtobool(input("  [Figure 6]  Y/N: "))
 #if showit:
 #    plt.figure(6)
@@ -262,10 +280,11 @@ print("the noise was so big that it passed the nearest Fibonacci number.")
 
 
 
-
 ##############################
 ##           END            ##
 ##############################
-print("\n\nThis concludes our run-though of using machine learning to predict Fibonacci numbers.")
+print("
+
+This concludes our run-though of using machine learning to predict Fibonacci numbers.")
 print("Thank you, and enjoy your day!")
 pylab.show()
