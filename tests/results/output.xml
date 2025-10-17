@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.9.24 on linux)" generated="2025-10-17T10:19:52.439631" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/workspace/application/tests">
+<suite id="s1-s1" name="Create Product" source="/workspace/application/tests/create_product.robot">
+<test id="s1-s1-t1" name="Create New Product" line="9">
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${payload}</var>
+<arg>name=Test Product</arg>
+<arg>description=This is a test product</arg>
+<arg>price=19.99</arg>
+<arg>in_stock=100</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.619265" elapsed="0.000148"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${BASE_URL}/products</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.619630" elapsed="0.000271"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.620079" elapsed="0.000131"/>
+</kw>
+<kw name="Get From Response">
+<msg time="2025-10-17T10:19:52.622121" level="FAIL">No keyword with name 'Get From Response' found. Did you try using keyword 'RequestsLibrary.GET' and forgot to use enough whitespace between keyword and arguments?</msg>
+<var>${response_body}</var>
+<arg>${response}</arg>
+<status status="FAIL" start="2025-10-17T10:19:52.622063" elapsed="0.000136">No keyword with name 'Get From Response' found. Did you try using keyword 'RequestsLibrary.GET' and forgot to use enough whitespace between keyword and arguments?</status>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response_body}</arg>
+<arg>Test Product</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.622365" elapsed="0.000126"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response_body}</arg>
+<arg>This is a test product</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.622647" elapsed="0.000114"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response_body}</arg>
+<arg>19.99</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.622912" elapsed="0.000110"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response_body}</arg>
+<arg>100</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.623174" elapsed="0.000100"/>
+</kw>
+<kw name="Get From Dictionary">
+<msg time="2025-10-17T10:19:52.625106" level="FAIL">No keyword with name 'Get From Dictionary' found. Did you try using keyword 'RequestsLibrary.GET' and forgot to use enough whitespace between keyword and arguments?</msg>
+<var>${product_id}</var>
+<arg>${response_body}</arg>
+<arg>id</arg>
+<status status="FAIL" start="2025-10-17T10:19:52.625052" elapsed="0.000122">No keyword with name 'Get From Dictionary' found. Did you try using keyword 'RequestsLibrary.GET' and forgot to use enough whitespace between keyword and arguments?</status>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${get_response}</var>
+<arg>mysession</arg>
+<arg>${BASE_URL}/products/${product_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.625342" elapsed="0.000095"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${get_response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.625594" elapsed="0.000117"/>
+</kw>
+<doc>Test the creation of a new product with valid payload.</doc>
+<tag>Functional</tag>
+<tag>High</tag>
+<tag>TC_PRODUCT_001</tag>
+<status status="FAIL" start="2025-10-17T10:19:52.617754" elapsed="0.008176">Several failures occurred:
+
+1) No keyword with name 'Get From Response' found. Did you try using keyword 'RequestsLibrary.GET' and forgot to use enough whitespace between keyword and arguments?
+
+2) No keyword with name 'Get From Dictionary' found. Did you try using keyword 'RequestsLibrary.GET' and forgot to use enough whitespace between keyword and arguments?</status>
+</test>
+<test id="s1-s1-t2" name="Create Product With Invalid Payload" line="25">
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${invalid_payload}</var>
+<arg>name=</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.626924" elapsed="0.000111"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${BASE_URL}/products</arg>
+<arg>json=${invalid_payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.627214" elapsed="0.000119"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-10-17T10:19:52.627488" elapsed="0.000111"/>
+</kw>
+<doc>Test the creation of a product with an invalid payload.</doc>
+<tag>High</tag>
+<tag>Negative</tag>
+<tag>TC_PRODUCT_002</tag>
+<status status="PASS" start="2025-10-17T10:19:52.626279" elapsed="0.001507"/>
+</test>
+<status status="FAIL" start="2025-10-17T10:19:52.471961" elapsed="0.156348"/>
+</suite>
+<status status="FAIL" start="2025-10-17T10:19:52.441127" elapsed="0.188030"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">Functional</stat>
+<stat pass="1" fail="1" skip="0">High</stat>
+<stat pass="1" fail="0" skip="0">Negative</stat>
+<stat pass="0" fail="1" skip="0">TC_PRODUCT_001</stat>
+<stat pass="1" fail="0" skip="0">TC_PRODUCT_002</stat>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="1" fail="1" skip="0">Tests</stat>
+<stat name="Create Product" id="s1-s1" pass="1" fail="1" skip="0">Tests.Create Product</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
