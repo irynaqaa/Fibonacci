@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.9.25 on linux)" generated="2025-11-14T20:23:55.165635" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/workspace/application/tests">
+<suite id="s1-s1" name="Create Product" source="/workspace/application/tests/create_product.robot">
+<test id="s1-s1-t1" name="Create A New Product With Valid Payload" line="10">
+<kw name="Create Product Payload">
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${payload}</var>
+<arg>name=Sample Product</arg>
+<arg>description=This is a sample product description.</arg>
+<arg>price=19.99</arg>
+<arg>in_stock=100</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.281755" elapsed="0.000128"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-11-14T20:23:55.282005" elapsed="0.000030"/>
+</return>
+<var>${payload}</var>
+<doc>Create a valid payload for product creation.</doc>
+<status status="PASS" start="2025-11-14T20:23:55.280866" elapsed="0.001231"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<arg>my_api_session</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.282245" elapsed="0.000123"/>
+</kw>
+<kw name="Post Request" owner="RequestsLibrary">
+<msg time="2025-11-14T20:23:55.282546" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<var>${response}</var>
+<arg>my_api_session</arg>
+<arg>/products</arg>
+<arg>json=${payload}</arg>
+<doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.282511" elapsed="0.000321"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<arg>'Expected status code 201'</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.283005" elapsed="0.000161"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<arg>Sample Product</arg>
+<arg>'Expected product name in response'</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.283320" elapsed="0.000130"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<arg>This is a sample product description.</arg>
+<arg>'Expected product description in response'</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.283594" elapsed="0.000133"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<arg>19.99</arg>
+<arg>'Expected product price in response'</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.283874" elapsed="0.000122"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<arg>100</arg>
+<arg>'Expected product stock in response'</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.284224" elapsed="0.000124"/>
+</kw>
+<doc>Verify that a new product can be created with valid payload.</doc>
+<tag>Functional</tag>
+<tag>High</tag>
+<tag>TC_PRODUCTS_001</tag>
+<status status="PASS" start="2025-11-14T20:23:55.279483" elapsed="0.005042"/>
+</test>
+<status status="PASS" start="2025-11-14T20:23:55.199942" elapsed="0.085132"/>
+</suite>
+<suite id="s1-s2" name="Create Product Tests" source="/workspace/application/tests/create_product_tests.robot">
+<test id="s1-s2-t1" name="Create Product With Valid Payload" line="10">
+<kw name="Create Product Payload" owner="common_resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${payload}</var>
+<arg>name=Test Product</arg>
+<arg>price=19.99</arg>
+<arg>description=This is a test product.</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.288974" elapsed="0.000088"/>
+</kw>
+<return>
+<value>${payload}</value>
+<status status="PASS" start="2025-11-14T20:23:55.289148" elapsed="0.000025"/>
+</return>
+<var>${payload}</var>
+<doc>Create a valid product payload.</doc>
+<status status="PASS" start="2025-11-14T20:23:55.288673" elapsed="0.000549"/>
+</kw>
+<kw name="Create Product" owner="common_resources">
+<kw name="Create Session" owner="RequestsLibrary">
+<arg>product_api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.289681" elapsed="0.000109"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>product_api</arg>
+<arg>/</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.289931" elapsed="0.000103"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<arg>'Expected status code 201'</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.290177" elapsed="0.000129"/>
+</kw>
+<arg>${payload}</arg>
+<status status="PASS" start="2025-11-14T20:23:55.289413" elapsed="0.000963"/>
+</kw>
+<kw name="Validate Product Creation" owner="common_resources">
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>product_api</arg>
+<arg>/${payload['name']}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.290848" elapsed="0.000079"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<arg>'Expected status code 200'</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.291069" elapsed="0.000131"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()['name']}</arg>
+<arg>${payload['name']}</arg>
+<arg>'Product name should match'</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.291345" elapsed="0.000129"/>
+</kw>
+<arg>${payload}</arg>
+<status status="PASS" start="2025-11-14T20:23:55.290574" elapsed="0.000972"/>
+</kw>
+<doc>Verify that a product can be created with a valid payload.</doc>
+<tag>Functional</tag>
+<tag>High</tag>
+<tag>TC_PRODUCTS_005</tag>
+<status status="PASS" start="2025-11-14T20:23:55.287818" elapsed="0.003868"/>
+</test>
+<kw name="Delete Created Product" owner="common_resources" type="TEARDOWN">
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>product_api</arg>
+<arg>/${payload['name']}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.292436" elapsed="0.000076"/>
+</kw>
+<kw>
+<msg time="2025-11-14T20:23:55.292710" level="FAIL">Keyword name cannot be empty.</msg>
+<var>${product_id}</var>
+<var>${response.json()['id']}</var>
+<status status="FAIL" start="2025-11-14T20:23:55.292671" elapsed="0.000100">Keyword name cannot be empty.</status>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<arg>product_api</arg>
+<arg>/${product_id}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-11-14T20:23:55.292908" elapsed="0.000082"/>
+</kw>
+<doc>Clean up by deleting the created product.</doc>
+<status status="FAIL" start="2025-11-14T20:23:55.292253" elapsed="0.000932">Keyword name cannot be empty.</status>
+</kw>
+<status status="FAIL" start="2025-11-14T20:23:55.285714" elapsed="0.007547">Suite teardown failed:
+Keyword name cannot be empty.</status>
+</suite>
+<status status="FAIL" start="2025-11-14T20:23:55.167025" elapsed="0.127218"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="1" skip="0">Functional</stat>
+<stat pass="1" fail="1" skip="0">High</stat>
+<stat pass="1" fail="0" skip="0">TC_PRODUCTS_001</stat>
+<stat pass="0" fail="1" skip="0">TC_PRODUCTS_005</stat>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="1" fail="1" skip="0">Tests</stat>
+<stat name="Create Product" id="s1-s1" pass="1" fail="0" skip="0">Tests.Create Product</stat>
+<stat name="Create Product Tests" id="s1-s2" pass="0" fail="1" skip="0">Tests.Create Product Tests</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-11-14T20:23:55.282546" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+</errors>
+</robot>
