@@ -54,3 +54,7 @@ def myFib(argument):
     #return 'First %d Fibonacci numbers: %s' % (number, fibList(number))
     fibs = fibList(number)
     return render_template('output.html', num=number, list=fibs[0], msg = fibs[1])
+
+@app.route('/volume_test')
+def volume_test():
+    return render_template('volume_test.html')

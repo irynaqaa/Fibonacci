@@ -1,4 +1,2 @@
-from flask import Flask
+# Test package for the Fibonacci web application
 
-app = Flask(__name__)
-from app import views
