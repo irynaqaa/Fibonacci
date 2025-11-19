@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#!//anaconda/bin/python
-#!flask/bin/python
+# This script runs the Flask application
 from app import app
-app.run(debug=True)
+
+if __name__ == '__main__':
+    app.run(debug=True)

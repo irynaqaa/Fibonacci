@@ -14,16 +14,14 @@ GAUSSIAN_MEAN = 1
 GAUSSIAN_STDEV = 0.1
 
 
-
-## Add Gausian noise to simulate real-world data collection.
+## Add Gaussian noise to simulate real-world data collection.
 #   Noise scales by size of number to mimic that you're likely to be more
 #   precise if you have a few to count, and off by more when there are large
 #   numbers involved.
 def add_noise(list_of_pure_data):
     noisy_data = []
     for i in range(len(list_of_pure_data)):
-        noisy_data.append(np.random.normal(GAUSSIAN_MEAN,GAUSSIAN_STDEV,1)[0]*list_of_pure_data[i])
-    
+        noisy_data.append(np.random.normal(GAUSSIAN_MEAN, GAUSSIAN_STDEV, 1)[0] * list_of_pure_data[i])
     return noisy_data
 
 
@@ -35,16 +33,12 @@ def get_data(how_much):
     for i in range(how_much):
         data.append(fibnumbers[random.randrange(1, FIB_MAX, 1)])
     
-    # Add Gausian noise to simulate real-world data
-    add_noise(data)
-
-    return data
-
-
+    # Add Gaussian noise to simulate real-world data
+    return add_noise(data)
 
 
 if __name__ == "__main__":
     SHOW_THIS_MANY = 20
     print("..Obtaining", SHOW_THIS_MANY, "data points, with values obtained from the first", FIB_MAX)
-    print("..fibonacci numbers, with Gausian noise of mean", GAUSSIAN_MEAN,"and standard deviation", GAUSSIAN_STDEV, ".)\n")
+    print("..fibonacci numbers, with Gaussian noise of mean", GAUSSIAN_MEAN, "and standard deviation", GAUSSIAN_STDEV, ".")
     print(get_data(SHOW_THIS_MANY))
