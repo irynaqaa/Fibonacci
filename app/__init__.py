@@ -1,4 +1,3 @@
-from flask import Flask
-
-app = Flask(__name__)
-from app import views
+"""
+Package for Selenium tests related to the application.
+"""
