@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.9.25 on linux)" generated="2025-11-25T07:40:04.420615" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/workspace/application/tests">
+<suite id="s1-s1" name="Create Product" source="/workspace/application/tests/create_product.robot">
+<test id="s1-s1-t1" name="Create Product" line="5">
+<doc>Test case to create a product</doc>
+<status status="FAIL" start="2025-11-25T07:40:04.450864" elapsed="0.000504">Test cannot be empty.</status>
+</test>
+<status status="FAIL" start="2025-11-25T07:40:04.449041" elapsed="0.002752"/>
+</suite>
+<suite id="s1-s2" name="Fibonacci Calculation Tests" source="/workspace/application/tests/fibonacci_calculation_tests.robot">
+<test id="s1-s2-t1" name="Fibonacci Calculation Test" line="5">
+<doc>Test case for Fibonacci calculation</doc>
+<status status="FAIL" start="2025-11-25T07:40:04.454051" elapsed="0.000501">Test cannot be empty.</status>
+</test>
+<status status="FAIL" start="2025-11-25T07:40:04.452451" elapsed="0.002529"/>
+</suite>
+<suite id="s1-s3" name="Product Creation Tests" source="/workspace/application/tests/product_creation_tests.robot">
+<test id="s1-s3-t1" name="Create Product With Valid Data" line="11">
+<kw name="Create Product Data">
+<msg time="2025-11-25T07:40:04.527439" level="FAIL">No keyword with name 'Create Product Data' found.</msg>
+<var>${data}</var>
+<arg>Test Product</arg>
+<arg>10.99</arg>
+<status status="FAIL" start="2025-11-25T07:40:04.527374" elapsed="0.000130">No keyword with name 'Create Product Data' found.</status>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>${PRODUCT_ENDPOINT}</arg>
+<arg>json=${data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-11-25T07:40:04.527723" elapsed="0.000141"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<arg>'Expected status code 201'</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-11-25T07:40:04.528013" elapsed="0.000158"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${response_body}</var>
+<arg>${PRODUCT_ENDPOINT}/${data['id']}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-11-25T07:40:04.528318" elapsed="0.000067"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response_body}</arg>
+<arg>${data['name']}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-11-25T07:40:04.528516" elapsed="0.000101"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response_body}</arg>
+<arg>${data['price']}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-11-25T07:40:04.528747" elapsed="0.000100"/>
+</kw>
+<doc>Verify that a product can be created with valid data.</doc>
+<tag>Functional</tag>
+<tag>High</tag>
+<tag>TC_PRODUCTS_001</tag>
+<status status="FAIL" start="2025-11-25T07:40:04.524359" elapsed="0.004676">No keyword with name 'Create Product Data' found.</status>
+</test>
+<test id="s1-s3-t2" name="Create Product With Invalid Data" line="21">
+<kw name="Create Invalid Product Data">
+<msg time="2025-11-25T07:40:04.531422" level="FAIL">No keyword with name 'Create Invalid Product Data' found.</msg>
+<var>${invalid_data}</var>
+<status status="FAIL" start="2025-11-25T07:40:04.531382" elapsed="0.000090">No keyword with name 'Create Invalid Product Data' found.</status>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>${PRODUCT_ENDPOINT}</arg>
+<arg>json=${invalid_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-11-25T07:40:04.531611" elapsed="0.000107"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<arg>'Expected status code 400'</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-11-25T07:40:04.531858" elapsed="0.000141"/>
+</kw>
+<doc>Ensure that creating a product with invalid data fails.</doc>
+<tag>High</tag>
+<tag>Negative</tag>
+<tag>TC_PRODUCTS_002</tag>
+<status status="FAIL" start="2025-11-25T07:40:04.529372" elapsed="0.002823">No keyword with name 'Create Invalid Product Data' found.</status>
+</test>
+<kw name="Delete Product After Tests" type="TEARDOWN">
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>${PRODUCT_ENDPOINT}/${product_id}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-11-25T07:40:04.533190" elapsed="0.000071"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>204</arg>
+<arg>'Expected status code 204'</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-11-25T07:40:04.533417" elapsed="0.000132"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Product with ID ${product_id} deleted successfully.</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-25T07:40:04.533702" elapsed="0.000089"/>
+</kw>
+<arg>${product_id}</arg>
+<doc>Clean up by deleting the product created during tests.</doc>
+<status status="PASS" start="2025-11-25T07:40:04.532972" elapsed="0.000883"/>
+</kw>
+<status status="FAIL" start="2025-11-25T07:40:04.455629" elapsed="0.078275"/>
+</suite>
+<status status="FAIL" start="2025-11-25T07:40:04.421942" elapsed="0.112813"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="4" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">Functional</stat>
+<stat pass="0" fail="2" skip="0">High</stat>
+<stat pass="0" fail="1" skip="0">Negative</stat>
+<stat pass="0" fail="1" skip="0">TC_PRODUCTS_001</stat>
+<stat pass="0" fail="1" skip="0">TC_PRODUCTS_002</stat>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="0" fail="4" skip="0">Tests</stat>
+<stat name="Create Product" id="s1-s1" pass="0" fail="1" skip="0">Tests.Create Product</stat>
+<stat name="Fibonacci Calculation Tests" id="s1-s2" pass="0" fail="1" skip="0">Tests.Fibonacci Calculation Tests</stat>
+<stat name="Product Creation Tests" id="s1-s3" pass="0" fail="2" skip="0">Tests.Product Creation Tests</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-11-25T07:40:04.412459" level="WARN">Error in file '/workspace/application/tests/common_resources.robot' on line 13: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-11-25T07:40:04.412740" level="WARN">Error in file '/workspace/application/tests/common_resources.robot' on line 17: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-11-25T07:40:04.450236" level="ERROR">Error in file '/workspace/application/tests/create_product.robot' on line 2: Resource file 'application/tests/common_resources.robot' does not exist.</msg>
+<msg time="2025-11-25T07:40:04.453460" level="ERROR">Error in file '/workspace/application/tests/fibonacci_calculation_tests.robot' on line 2: Resource file 'application/tests/common_resources.robot' does not exist.</msg>
+<msg time="2025-11-25T07:40:04.523510" level="ERROR">Error in file '/workspace/application/tests/product_creation_tests.robot' on line 3: Resource file 'application/tests/common_resources.robot' does not exist.</msg>
+</errors>
+</robot>
