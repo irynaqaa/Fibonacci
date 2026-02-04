@@ -1,5 +1,6 @@
 from flask import render_template
 from app import app
+from fibonacci_module import get_nth_fibonacci, sum_of_fibonacci
 
 @app.route('/')
 @app.route('/index')
@@ -50,7 +51,21 @@ def myFib(argument):
 
         return (fibNumbers, message)
 
-
-    #return 'First %d Fibonacci numbers: %s' % (number, fibList(number))
     fibs = fibList(number)
     return render_template('output.html', num=number, list=fibs[0], msg = fibs[1])
+
+@app.route('/fibonacci/nth/<int:n>')
+def fibonacci_nth(n):
+    try:
+        result = get_nth_fibonacci(n)
+        return {'nth_fibonacci': result}
+    except ValueError as e:
+        return {'error': str(e)}, 400
+
+@app.route('/fibonacci/sum/<int:n>')
+def fibonacci_sum(n):
+    try:
+        result = sum_of_fibonacci(n)
+        return {'sum_of_fibonacci': result}
+    except ValueError as e:
+        return {'error': str(e)}, 400
