@@ -54,3 +54,19 @@ def myFib(argument):
     #return 'First %d Fibonacci numbers: %s' % (number, fibList(number))
     fibs = fibList(number)
     return render_template('output.html', num=number, list=fibs[0], msg = fibs[1])
+
+@app.route('/fibonacci/<int:n>')
+def get_fibonacci(n):
+    try:
+        result = fibonacci(n)
+        return {'nth_fibonacci': result}
+    except ValueError as e:
+        return {'error': str(e)}, 400
+
+@app.route('/fibonacci/sum/<int:n>')
+def get_sum_fibonacci(n):
+    try:
+        result = sum_fibonacci(n)
+        return {'sum_fibonacci': result}
+    except ValueError as e:
+        return {'error': str(e)}, 400
