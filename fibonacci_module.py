@@ -147,7 +147,8 @@ def make_saved_Fibonacci_file():
     # See if file exists already, and warn
     if os.path.isfile(filename):
         prompt = "Warning: " + filename + " already exists with " + str(os.path.getsize(filename)/NUMBER_OF_BYTES)
-        prompt += " digits.\n  Do you wish to overwrite?: (Y/N) "
+        prompt += " digits.
+  Do you wish to overwrite?: (Y/N) "
         ans = input(prompt)
         overwrite = distutils.util.strtobool(ans)
         if not overwrite:
@@ -217,7 +218,8 @@ def nearest_saved_fib_index(input):
         raise ValueError("All the Fibonacci numbers are positive. Please enter a positive value.")
         return -1
     if input > right_fib:
-        raise ValueError(input,"exceeds highest saved Fibonacci number.  \nEither choose a lower number to round, or regenerate the file containing the saved Fibonacci numbers (", filename,") with more values.")
+        raise ValueError(input,"exceeds highest saved Fibonacci number.  
+Either choose a lower number to round, or regenerate the file containing the saved Fibonacci numbers (", filename,") with more values.")
 
     # Binary search to get lower bound for nth Fibonacci number
     while (left_fib < right_fib):
@@ -245,3 +247,13 @@ def nearest_saved_fib_index(input):
         output = left_index
 
     return output
+
+# Function to calculate the nth Fibonacci number
+def fibonacci(n):
+    n = ensure_positive_int(n)
+    return f_Binet(n)
+
+# Function to calculate the sum of the first n Fibonacci numbers
+def sum_fibonacci(n):
+    n = ensure_positive_int(n)
+    return sum(fibList(n))

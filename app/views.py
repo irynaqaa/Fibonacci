@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, jsonify
 from app import app
 
 @app.route('/')
@@ -54,3 +54,13 @@ def myFib(argument):
     #return 'First %d Fibonacci numbers: %s' % (number, fibList(number))
     fibs = fibList(number)
     return render_template('output.html', num=number, list=fibs[0], msg = fibs[1])
+
+@app.route('/fibonacci/<int:n>')
+def get_fibonacci(n):
+    result = fibonacci(n)
+    return jsonify({"nth_fibonacci": result})
+
+@app.route('/fibonacci/sum/<int:n>')
+def get_fibonacci_sum(n):
+    result = sum_fibonacci(n)
+    return jsonify({"sum_of_fibonacci": result})
