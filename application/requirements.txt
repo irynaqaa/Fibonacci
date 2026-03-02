@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+psycopg2-binary
+python-jose[cryptography]
+sqlalchemy
+pytest
+black
+flake8
+isort
